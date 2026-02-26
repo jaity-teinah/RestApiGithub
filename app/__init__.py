@@ -26,7 +26,7 @@ def create_app(config_name: str = "development") -> Flask:
 app.register_blueprint(employees_bp, url_prefix="/api/v1/employees")
 
     # Register error handlers
-    from app.errors import register_error_handlers
+from app.errors import register_error_handlers
     register_error_handlers(app)
 
     return app
