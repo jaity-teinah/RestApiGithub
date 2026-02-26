@@ -4,7 +4,7 @@ Flask REST API Application Factory.
 from flask import Flask
 from app.extensions import jwt
 from app.config import config_by_name
-
+from app.errors import register_error_handlers  # imports can be at the top
 
 def create_app(config_name: str = "development") -> Flask:
     """Application factory pattern."""
@@ -23,10 +23,9 @@ def create_app(config_name: str = "development") -> Flask:
     app.register_blueprint(health_bp, url_prefix="/api/v1")
     app.register_blueprint(auth_bp, url_prefix="/api/v1/auth")
     app.register_blueprint(students_bp, url_prefix="/api/v1/students")
-app.register_blueprint(employees_bp, url_prefix="/api/v1/employees")
+    app.register_blueprint(employees_bp, url_prefix="/api/v1/employees")
 
     # Register error handlers
-from app.errors import register_error_handlers
     register_error_handlers(app)
 
     return app
